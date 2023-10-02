@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
+import { WeatherData } from '../models/weather.model';
 
 @Component({
   selector: 'app-weather-card',
@@ -7,7 +8,6 @@ import { WeatherService } from '../services/weather.service';
   styleUrls: ['./weather-card.component.css']
 })
 export class WeatherCardComponent implements OnInit {
-  weatherData: any[] = [];
 
   constructor (private WeatherService: WeatherService) {}
 
@@ -15,10 +15,15 @@ export class WeatherCardComponent implements OnInit {
     this.loadWeatherData();
   }
 
+  weatherData?: WeatherData;
+
   loadWeatherData() {
-    this.WeatherService.getWeatherData().subscribe(data => {
-      this.weatherData = data;
-      console.log(this.weatherData)
+    this.WeatherService.getWeatherData('Tapiola')
+    .subscribe({
+      next: (response) => {
+        this.weatherData = response;
+        console.log(this.weatherData)
+      }
     })
   }
 }

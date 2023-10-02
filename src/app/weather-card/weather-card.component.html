@@ -1,1 +1,23 @@
-<p>weather-card works!</p>
+<div *ngIf="weatherData" class="">
+    <div>
+        <div><img [src]="weatherData.current.condition.icon" alt="Weather Icon"></div>
+        <div>
+            <span>{{ weatherData.current.temp_c }}°C</span>
+            <H1>{{ weatherData.location.name }}</H1>
+            <h3>{{ weatherData.location.country }}</h3>
+            <p>{{ weatherData.current.condition.text }}</p>
+        </div>
+        <div>{{ weatherData.location.localtime }}</div>
+    </div>
+    <div>
+        <p>Feels like: {{ weatherData.current.feelslike_c }}°C</p>
+        <p>Humidity: {{ weatherData.current.humidity }}%</p>
+        <p>Wind: {{ weatherData.current.wind_kph }} kph</p>
+        <p>Wind direction: {{ weatherData.current.wind_dir }}</p>
+        <p>Pressure: {{ weatherData.current.pressure_mb }} mmHg</p>
+        <p>UV index: {{ weatherData.current.uv }}</p>
+    </div>
+    <div>
+
+    </div>
+</div>

@@ -28,12 +28,6 @@ export class WeatherService {
       .set (
         'q', cityName
       )
-      .set (
-        'units', 'metric'
-      )
-      .set (
-        'mode', 'json'
-      )
 
     })
   }
