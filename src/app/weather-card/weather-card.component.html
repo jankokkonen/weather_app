@@ -1,23 +1,32 @@
-<div *ngIf="weatherData" class="">
-    <div>
-        <div><img [src]="weatherData.current.condition.icon" alt="Weather Icon"></div>
-        <div>
-            <span>{{ weatherData.current.temp_c }}°C</span>
-            <H1>{{ weatherData.location.name }}</H1>
-            <h3>{{ weatherData.location.country }}</h3>
-            <p>{{ weatherData.current.condition.text }}</p>
+<div *ngIf="weatherData" class="max-w-2xl mx-auto border border-solid border-gray-400 border-1 p-5">
+    <div>  
+        <div class="flex justify-between">
+            <div>
+                <img [src]="weatherData.current.condition.icon" alt="Weather Icon">
+            </div>
+            <div class="text-center">
+                <span class="text-7xl">{{ weatherData.current.temp_c }}°C</span>
+                <H1 class="text-3xl">{{ weatherData.location.name }}, {{ weatherData.location.country }}</H1>
+                <p>{{ weatherData.current.condition.text }}</p>
+            </div>
+            <div class="text-2xl">
+                {{ weatherData.location.localtime.split(' ')[1] }}
+            </div>
         </div>
-        <div>{{ weatherData.location.localtime }}</div>
-    </div>
-    <div>
-        <p>Feels like: {{ weatherData.current.feelslike_c }}°C</p>
-        <p>Humidity: {{ weatherData.current.humidity }}%</p>
-        <p>Wind: {{ weatherData.current.wind_kph }} kph</p>
-        <p>Wind direction: {{ weatherData.current.wind_dir }}</p>
-        <p>Pressure: {{ weatherData.current.pressure_mb }} mmHg</p>
-        <p>UV index: {{ weatherData.current.uv }}</p>
-    </div>
-    <div>
+        <div class="flex justify-evenly py-7">
+            <div>
+                <p>Feels like: {{ weatherData.current.feelslike_c }}°C</p>
+                <p>Humidity: {{ weatherData.current.humidity }}%</p>
+                <p>Wind: {{ weatherData.current.wind_kph }} kph</p>
+            </div>
+            <div>
+                <p>Wind direction: {{ weatherData.current.wind_dir }}</p>
+                <p>Pressure: {{ weatherData.current.pressure_mb }} mmHg</p>
+                <p>UV index: {{ weatherData.current.uv }}</p>
+            </div>
+        </div>
+        <div>
 
+        </div>
     </div>
 </div>
