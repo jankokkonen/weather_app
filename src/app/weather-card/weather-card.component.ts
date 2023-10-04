@@ -12,17 +12,28 @@ export class WeatherCardComponent implements OnInit {
   constructor (private WeatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.loadWeatherData();
+    this.loadCurrentWeatherData();
+    this.loadForecastWeatherData();
   }
 
-  weatherData?: WeatherData;
+  currentWeatherData?: WeatherData;
 
-  loadWeatherData() {
-    this.WeatherService.getWeatherData('Tapiola')
+  loadCurrentWeatherData() {
+    this.WeatherService.getCurrentWeatherData('Tapiola')
     .subscribe({
       next: (response) => {
-        this.weatherData = response;
-        console.log(this.weatherData)
+        this.currentWeatherData = response;
+        console.log(this.currentWeatherData)
+      }
+    })
+  }
+
+  loadForecastWeatherData() {
+    this.WeatherService.getForecastWeatherData('Tapiola', 1)
+    .subscribe({
+      next: (response) => {
+        this.currentWeatherData = response;
+        console.log(this.currentWeatherData)
       }
     })
   }

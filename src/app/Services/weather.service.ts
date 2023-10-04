@@ -11,8 +11,8 @@ export class WeatherService {
 
   constructor(private http: HttpClient) { }
 
-  getWeatherData(cityName: string): Observable<WeatherData> {
-    return this.http.get<WeatherData>(environment.weatherApiBaseUrl, {
+  getCurrentWeatherData(cityName: string): Observable<WeatherData> {
+    return this.http.get<WeatherData>(environment.currentWeatherApiBaseUrl, {
 
       headers: new HttpHeaders()
       .set (
@@ -27,6 +27,30 @@ export class WeatherService {
       params: new HttpParams()
       .set (
         'q', cityName
+      )
+
+    })
+  }
+
+  getForecastWeatherData(cityName: string, days: number): Observable<WeatherData> {
+    return this.http.get<WeatherData>(environment.forecastWeatherApiBaseUrl, {
+
+      headers: new HttpHeaders()
+      .set (
+        environment.XRapidAPIHostHeaderName, 
+        environment.XRapidAPIHostHeaderValue
+      )
+      .set (
+        environment.XRapidAPIKeyHeaderName, 
+        environment.XRapidAPIKeyHeaderValue
+      ),
+
+      params: new HttpParams()
+      .set (
+        'q', cityName
+      )
+      .set (
+        'days', days
       )
 
     })
