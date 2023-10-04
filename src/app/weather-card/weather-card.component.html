@@ -1,3 +1,7 @@
+<div>
+    <input type="text" [(ngModel)]="cityName" placeholder="Your city name">
+    <button (click)="loadCurrentWeatherData()">Search</button>
+</div>
 <div *ngIf="currentWeatherData" class="max-w-2xl mx-auto border border-solid border-gray-400 border-1 p-5 mt-9">
     <div>  
         <H1 class="text-4xl text-center">{{ currentWeatherData.location.name }}, {{ currentWeatherData.location.country }}</H1>
