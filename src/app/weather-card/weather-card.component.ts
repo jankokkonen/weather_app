@@ -13,23 +13,13 @@ export class WeatherCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCurrentWeatherData();
-    this.loadForecastWeatherData();
   }
 
   currentWeatherData?: WeatherData;
+  forecastWeatherData?: WeatherData;
 
   loadCurrentWeatherData() {
     this.WeatherService.getCurrentWeatherData('Tapiola')
-    .subscribe({
-      next: (response) => {
-        this.currentWeatherData = response;
-        console.log(this.currentWeatherData)
-      }
-    })
-  }
-
-  loadForecastWeatherData() {
-    this.WeatherService.getForecastWeatherData('Tapiola', 1)
     .subscribe({
       next: (response) => {
         this.currentWeatherData = response;
