@@ -1,22 +1,23 @@
-<div class="text-center">
-    <input type="text" #cityInput placeholder="Your city name">
-    <button (click)="loadCurrentWeatherData()">Search</button>
+<div class="text-center mt-5">
+    <input class="text-center mr-1 rounded-lg" type="text" #cityInput placeholder="Your city name">
+    <button class="rounded-lg px-2 text-center ml-1 bg-[#00ADB5]" (click)="loadCurrentWeatherData()">Search</button>
 </div>
-<div *ngIf="currentWeatherData" class="max-w-2xl mx-auto border border-solid border-gray-400 border-1 p-5 mt-9">
+<div *ngIf="currentWeatherData" class="max-w-2xl w-[95%] mx-auto rounded-lg p-5 mt-5 bg-[#222831]">
     <div>  
-        <H1 class="text-4xl text-center">{{ currentWeatherData.location.name }}, {{ currentWeatherData.location.country }}</H1>
-        <div class="flex justify-between items-center mt-9">
+        <H1 class="text-2xl text-center sm:text-4xl">{{ currentWeatherData.location.name }}, {{ currentWeatherData.location.country }}</H1>
+        <div class="flex justify-between items-center my-7">
             <div class="flex items-center">
                 <img [src]="currentWeatherData.current.condition.icon" alt="Weather Icon" class="pt-2" width="50" height="50">
-                <span class="text-4xl flex row">{{ currentWeatherData.current.temp_c }}<p class="text-lg">°C</p></span>
+                <span class="text-2xl flex row sm:text-4xl">{{ currentWeatherData.current.temp_c }}<p class="text-lg">°C</p></span>
                 <div class="pl-5 text-xs">
                     <p>Feels like: {{ currentWeatherData.current.feelslike_c }}°C</p>
                     <p>Humidity: {{ currentWeatherData.current.humidity }}%</p>
                     <p>Wind: {{ (currentWeatherData.current.wind_kph * 0.27778).toFixed(0) }} m/s</p>
                 </div>
             </div>
-            <div class="text-2xl">
-                {{ currentWeatherData.location.localtime.split(' ')[1] }}
+            <div class="text-lg sm:text-2xl">
+                <span>{{ currentWeatherData.location.localtime.split(' ')[1] }}</span>
+                <p class="text-xs">Local time</p>
             </div>
         </div>
         <div>
