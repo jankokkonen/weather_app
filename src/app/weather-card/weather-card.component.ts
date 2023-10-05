@@ -8,7 +8,7 @@ import { WeatherData } from '../models/weather.model';
   styleUrls: ['./weather-card.component.css']
 })
 export class WeatherCardComponent implements OnInit {
-  @ViewChild('cityName')cityNameElement!: ElementRef;
+  @ViewChild('cityInput')cityNameElement!: ElementRef;
   cityName: string = '';
   currentWeatherData?: WeatherData;
 
@@ -20,12 +20,11 @@ export class WeatherCardComponent implements OnInit {
 
   loadCurrentWeatherData() {
     this.cityName = this.cityNameElement.nativeElement.value;
-    console.log(this.cityName)
     this.WeatherService.getCurrentWeatherData(this.cityName)
     .subscribe({
       next: (response) => {
         this.currentWeatherData = response;
-        console.log(this.currentWeatherData)
+        //console.log(this.currentWeatherData)
       }
     })
   }

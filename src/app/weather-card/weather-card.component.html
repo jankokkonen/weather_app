@@ -1,5 +1,5 @@
 <div class="text-center">
-    <input type="text" #cityName placeholder="Your city name">
+    <input type="text" #cityInput placeholder="Your city name">
     <button (click)="loadCurrentWeatherData()">Search</button>
 </div>
 <div *ngIf="currentWeatherData" class="max-w-2xl mx-auto border border-solid border-gray-400 border-1 p-5 mt-9">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div>
-            <app-temperature-chart></app-temperature-chart>
+            <app-temperature-chart [cityName]="cityName"></app-temperature-chart>
         </div>
     </div>
 </div>

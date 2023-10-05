@@ -14,30 +14,30 @@ export class TemperatureChartComponent implements OnInit {
   ctx: any;
   @ViewChild('mychart') mychart:any;
 
+  forecastWeatherData?: WeatherData;
+  tempData: number[] = [];
+@Input() cityName: string = '';
+
   constructor (private WeatherService: WeatherService) {}
   
   ngOnInit(): void {
   }
 
-  forecastWeatherData?: WeatherData;
-  tempData: number[] = [];
-
-  @Input() cityName: string = '';
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['cityName']) {
-      const cityName = changes['cityName'].currentValue;
-      console.log(cityName)
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('cityName changes:', this.cityName);
+    if (changes['cityName'] && !changes['cityName'].firstChange) {
       this.loadForecastWeatherData();
     }
   }
 
   loadForecastWeatherData() {
+    this.tempData = [];
+    console.log(this.cityName)
     this.WeatherService.getForecastWeatherData(this.cityName, 1)
     .subscribe({
       next: (response) => {
         this.forecastWeatherData = response;
-        console.log(this.forecastWeatherData)
+        //console.log(this.forecastWeatherData)
         this.forecastWeatherData.forecast.forecastday[0].hour.forEach((hour) => {
           this.tempData.push(hour.temp_c);
         });
@@ -50,13 +50,13 @@ export class TemperatureChartComponent implements OnInit {
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
 
-    const data = [8,7,9,12,14,10,6,7,8,7,5,4];
+    const data = this.tempData;
     const maxDataValue = Math.max(...data); 
     const minDataValue = Math.min(...data); 
 
     const suggestedMin = minDataValue - 5;
     const suggestedMax = maxDataValue + 5;
-    console.log(this.tempData)
+    //console.log(this.tempData)
 
     if (this.canvas.chart) {
       this.canvas.chart.destroy();
