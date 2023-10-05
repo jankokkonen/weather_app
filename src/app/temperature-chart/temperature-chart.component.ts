@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { WeatherData } from '../models/weather.model';
 
@@ -17,14 +17,23 @@ export class TemperatureChartComponent implements OnInit {
   constructor (private WeatherService: WeatherService) {}
   
   ngOnInit(): void {
-    this.loadForecastWeatherData();
   }
 
   forecastWeatherData?: WeatherData;
   tempData: number[] = [];
 
+  @Input() cityName: string = '';
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['cityName']) {
+      const cityName = changes['cityName'].currentValue;
+      console.log(cityName)
+      this.loadForecastWeatherData();
+    }
+  }
+
   loadForecastWeatherData() {
-    this.WeatherService.getForecastWeatherData('Tapiola', 1)
+    this.WeatherService.getForecastWeatherData(this.cityName, 1)
     .subscribe({
       next: (response) => {
         this.forecastWeatherData = response;
@@ -48,7 +57,12 @@ export class TemperatureChartComponent implements OnInit {
     const suggestedMin = minDataValue - 5;
     const suggestedMax = maxDataValue + 5;
     console.log(this.tempData)
-    new Chart(this.ctx, {
+
+    if (this.canvas.chart) {
+      this.canvas.chart.destroy();
+    }
+
+    this.canvas.chart = new Chart(this.ctx, {
       type: 'line',
       data: {
         datasets: [{

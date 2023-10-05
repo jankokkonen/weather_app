@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { WeatherData } from '../models/weather.model';
 
@@ -8,19 +8,19 @@ import { WeatherData } from '../models/weather.model';
   styleUrls: ['./weather-card.component.css']
 })
 export class WeatherCardComponent implements OnInit {
+  @ViewChild('cityName')cityNameElement!: ElementRef;
+  cityName: string = '';
+  currentWeatherData?: WeatherData;
 
   constructor (private WeatherService: WeatherService) {}
 
   ngOnInit(): void {
-    
+
   }
 
-  currentWeatherData?: WeatherData;
-  forecastWeatherData?: WeatherData;
-
-  cityName: string = '';
-
   loadCurrentWeatherData() {
+    this.cityName = this.cityNameElement.nativeElement.value;
+    console.log(this.cityName)
     this.WeatherService.getCurrentWeatherData(this.cityName)
     .subscribe({
       next: (response) => {
