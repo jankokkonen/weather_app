@@ -15,17 +15,29 @@ export class WeatherCardComponent implements OnInit {
   constructor (private WeatherService: WeatherService) {}
 
   ngOnInit(): void {
-
+    this.loadCurrentWeatherData();
   }
 
   loadCurrentWeatherData() {
-    this.cityName = this.cityNameElement.nativeElement.value;
-    this.WeatherService.getCurrentWeatherData(this.cityName)
-    .subscribe({
-      next: (response) => {
-        this.currentWeatherData = response;
-        //console.log(this.currentWeatherData)
-      }
-    })
+    
+    if (this.cityNameElement) {
+      this.cityName = this.cityNameElement.nativeElement.value
+      this.WeatherService.getCurrentWeatherData(this.cityName)
+      .subscribe({
+        next: (response) => {
+          this.currentWeatherData = response;
+          //console.log(this.currentWeatherData)
+        }
+      })
+    } else {
+      this.cityName = 'Helsinki';
+      this.WeatherService.getCurrentWeatherData(this.cityName)
+      .subscribe({
+        next: (response) => {
+          this.currentWeatherData = response;
+          //console.log(this.currentWeatherData)
+        }
+      })
+    }
   }
 }

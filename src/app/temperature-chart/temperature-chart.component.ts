@@ -32,7 +32,6 @@ export class TemperatureChartComponent implements OnInit {
 
   loadForecastWeatherData() {
     this.tempData = [];
-    console.log(this.cityName)
     this.WeatherService.getForecastWeatherData(this.cityName, 1)
     .subscribe({
       next: (response) => {
