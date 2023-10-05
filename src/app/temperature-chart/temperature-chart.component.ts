@@ -71,7 +71,7 @@ export class TemperatureChartComponent implements OnInit {
           label:'Temperature',
           data: this.tempData,
           backgroundColor: "rgb(115 185 243 / 0.4)",
-          borderColor: "#007ee7",
+          borderColor: "#00ADB5",
           fill: true,
           tension: 0.4
         }],
@@ -96,6 +96,7 @@ export class TemperatureChartComponent implements OnInit {
             radius: 0
           },
         },
+        
       }
     })
   }
