@@ -39,7 +39,7 @@ export class TemperatureChartComponent implements OnInit {
     .subscribe({
       next: (response) => {
         this.forecastWeatherData = response;
-        //console.log(this.forecastWeatherData)
+        console.log(this.forecastWeatherData)
         this.forecastWeatherData.forecast.forecastday[0].hour.forEach((hour) => {
           this.tempData.push(hour.temp_c);
         });

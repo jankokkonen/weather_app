@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { WeatherCardComponent } from './weather-card/weather-card.component';
 import { TemperatureChartComponent } from './temperature-chart/temperature-chart.component';
 import { FormsModule } from '@angular/forms';
+import { RainChartComponent } from './rain-chart/rain-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherCardComponent,
-    TemperatureChartComponent
+    TemperatureChartComponent,
+    RainChartComponent
   ],
   imports: [
     BrowserModule,
