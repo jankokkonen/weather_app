@@ -21,10 +21,13 @@ export class TemperatureChartComponent implements OnInit {
   constructor (private WeatherService: WeatherService) {}
   
   ngOnInit(): void {
+    if (this.cityName) {
+      this.loadForecastWeatherData();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('cityName changes:', this.cityName);
+    //console.log('cityName changes:', this.cityName);
     if (changes['cityName'] && !changes['cityName'].firstChange) {
       this.loadForecastWeatherData();
     }
