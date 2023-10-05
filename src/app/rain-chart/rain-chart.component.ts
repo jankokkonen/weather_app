@@ -53,11 +53,9 @@ export class RainChartComponent implements OnInit{
     this.ctx = this.canvas.getContext('2d');
 
     const data = this.tempData;
-    const maxDataValue = Math.max(...data); 
-    const minDataValue = Math.min(...data); 
+    const maxDataValue = Math.max(...data);
 
-    const suggestedMin = minDataValue - 1;
-    const suggestedMax = maxDataValue + 1;
+    const suggestedMax = maxDataValue + .1;
     //console.log(this.tempData)
 
     if (this.canvas.chart) {
@@ -68,7 +66,7 @@ export class RainChartComponent implements OnInit{
       type: 'bar',
       data: {
         datasets: [{
-          label:'Temperature',
+          label:'Rain mm/h',
           data: this.tempData,
           backgroundColor: "rgb(115 185 243 / 0.4)",
           borderColor: "#00ADB5"
@@ -85,7 +83,7 @@ export class RainChartComponent implements OnInit{
             beginAtZero: true,
             suggestedMax: suggestedMax,
             ticks: {
-              stepSize: 0.5
+              stepSize: 0.1
             }
           }
         },
