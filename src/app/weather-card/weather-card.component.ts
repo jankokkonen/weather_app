@@ -24,7 +24,6 @@ export class WeatherCardComponent implements OnInit {
       target.select();
     }
   }
-
   loadCurrentWeatherData() {
     if (this.cityNameElement) {
       this.cityName = this.cityNameElement.nativeElement.value

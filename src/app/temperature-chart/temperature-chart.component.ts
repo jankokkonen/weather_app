@@ -39,7 +39,7 @@ export class TemperatureChartComponent implements OnInit {
     .subscribe({
       next: (response) => {
         this.forecastWeatherData = response;
-        console.log(this.forecastWeatherData)
+        //console.log(this.forecastWeatherData)
         this.forecastWeatherData.forecast.forecastday[0].hour.forEach((hour) => {
           this.tempData.push(hour.temp_c);
         });
@@ -70,7 +70,7 @@ export class TemperatureChartComponent implements OnInit {
         datasets: [{
           label:'Temperature',
           data: this.tempData,
-          backgroundColor: "rgb(115 185 243 / 0.4)",
+          backgroundColor: "#00ADB5",
           borderColor: "#00ADB5",
           fill: true,
           tension: 0.4
