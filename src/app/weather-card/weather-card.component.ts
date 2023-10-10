@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { WeatherData } from '../models/weather.model';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-weather-card',
@@ -12,7 +13,7 @@ export class WeatherCardComponent implements OnInit {
   cityName: string = '';
   currentWeatherData?: WeatherData;
 
-  constructor (private WeatherService: WeatherService) {}
+  constructor (private WeatherService: WeatherService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadCurrentWeatherData();
@@ -32,6 +33,7 @@ export class WeatherCardComponent implements OnInit {
         next: (response) => {
           this.currentWeatherData = response;
           //console.log(this.currentWeatherData)
+          this.router.navigate(['/temperature', this.cityName]);
         }
       })
     } else {
@@ -41,6 +43,7 @@ export class WeatherCardComponent implements OnInit {
         next: (response) => {
           this.currentWeatherData = response;
           //console.log(this.currentWeatherData)
+          this.router.navigate(['/temperature', this.cityName]);
         }
       })
     }

@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 
 
-h1, p, span, button {
+h1, p, span, button, a {
     color: #EEEEEE;
 }
 

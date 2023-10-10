@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { WeatherData } from '../models/weather.model';
+import { ActivatedRoute } from '@angular/router';
 
 import { Chart } from 'chart.js/auto'; 
 
@@ -16,19 +17,26 @@ export class TemperatureChartComponent implements OnInit {
 
   forecastWeatherData?: WeatherData;
   tempData: number[] = [];
-@Input() cityName: string = '';
+  @Input() cityName: string = '';
 
-  constructor (private WeatherService: WeatherService) {}
+  constructor (private WeatherService: WeatherService, private route: ActivatedRoute) {}
   
   ngOnInit(): void {
+    
+    this.route.params.subscribe(params => {
+    this.cityName = params['cityName'];
+    });
     if (this.cityName) {
       this.loadForecastWeatherData();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //console.log('cityName changes:', this.cityName);
+    console.log('cityName changes:', this.cityName);
     if (changes['cityName'] && !changes['cityName'].firstChange) {
+      this.route.params.subscribe(params => {
+        });
+        console.log(this.cityName)
       this.loadForecastWeatherData();
     }
   }
@@ -70,10 +78,10 @@ export class TemperatureChartComponent implements OnInit {
         datasets: [{
           label:'Temperature',
           data: this.tempData,
-          backgroundColor: "#00ADB5",
+          backgroundColor: "rgba(0, 173, 181, 0.6)",
           borderColor: "#00ADB5",
-          fill: true,
-          tension: 0.4
+          fill: false,
+          tension: .5
         }],
           labels: ['0.00', '1.00', '2.00', '3.00', '4.00', '5.00', '6.00', '7.00', '8.00', '9.00', '10.00', '11.00', 
           '12.00', '13.00', '14.00', '15.00', '16.00','17.00','18.00','19.00','20.00','21.00','22.00','23.00']
