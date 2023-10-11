@@ -17,7 +17,7 @@ export class RainChartComponent implements OnInit{
 
   forecastWeatherData?: WeatherData;
   tempData: number[] = [];
-@Input() cityName: string = '';
+  @Input() cityName: string = '';
 
   constructor (private WeatherService: WeatherService, private route: ActivatedRoute) {}
   
@@ -43,7 +43,7 @@ export class RainChartComponent implements OnInit{
     .subscribe({
       next: (response) => {
         this.forecastWeatherData = response;
-        console.log(this.forecastWeatherData)
+        //console.log(this.forecastWeatherData)
         this.forecastWeatherData.forecast.forecastday[0].hour.forEach((hour) => {
           this.tempData.push(hour.precip_mm);
         });

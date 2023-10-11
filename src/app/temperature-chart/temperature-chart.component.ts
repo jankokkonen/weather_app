@@ -4,6 +4,7 @@ import { WeatherData } from '../models/weather.model';
 import { ActivatedRoute } from '@angular/router';
 
 import { Chart } from 'chart.js/auto'; 
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-temperature-chart',
@@ -14,7 +15,7 @@ export class TemperatureChartComponent implements OnInit {
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart:any;
-
+  private cityNameSubscription!: Subscription;
   forecastWeatherData?: WeatherData;
   tempData: number[] = [];
   @Input() cityName: string = '';
@@ -22,23 +23,14 @@ export class TemperatureChartComponent implements OnInit {
   constructor (private WeatherService: WeatherService, private route: ActivatedRoute) {}
   
   ngOnInit(): void {
-    
-    this.route.params.subscribe(params => {
-    this.cityName = params['cityName'];
-    });
-    if (this.cityName) {
-      this.loadForecastWeatherData();
-    }
+
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('cityName changes:', this.cityName);
-    if (changes['cityName'] && !changes['cityName'].firstChange) {
-      this.route.params.subscribe(params => {
-        });
-        console.log(this.cityName)
+  ngAfterViewInit(): void {
+    this.cityNameSubscription = this.WeatherService.getCityNameObservable().subscribe(cityName => {
+      this.cityName = cityName;
       this.loadForecastWeatherData();
-    }
+    });
   }
 
   loadForecastWeatherData() {

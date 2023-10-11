@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import { WeatherData } from '../models/weather.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
+  private cityNameSubject = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) { }
 
@@ -54,5 +55,14 @@ export class WeatherService {
       )
 
     })
+  }
+
+  updateCityName(cityName: string) {
+    this.cityNameSubject.next(cityName);
+    console.log('Service: ' + cityName)
+  }
+
+  getCityNameObservable(): Observable<string> {
+    return this.cityNameSubject.asObservable();
   }
 }

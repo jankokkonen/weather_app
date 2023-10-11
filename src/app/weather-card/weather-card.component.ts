@@ -32,7 +32,7 @@ export class WeatherCardComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.currentWeatherData = response;
-          //console.log(this.currentWeatherData)
+          this.WeatherService.updateCityName(this.cityName);
           this.router.navigate(['/temperature', this.cityName]);
         }
       })
@@ -42,7 +42,7 @@ export class WeatherCardComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.currentWeatherData = response;
-          //console.log(this.currentWeatherData)
+          this.WeatherService.updateCityName(this.cityName);
           this.router.navigate(['/temperature', this.cityName]);
         }
       })

@@ -24,6 +24,6 @@
             <a [routerLink]="['/temperature', cityName]" class="pr-2">Temperature °C</a>
             <a [routerLink]="['/rain', cityName]">Rain mm/h</a>
         </div>
-        <router-outlet></router-outlet>
+        <router-outlet *ngIf="cityName"></router-outlet>
     </div>
 </div>
