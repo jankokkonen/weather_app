@@ -21,8 +21,19 @@
             </div>
         </div>
         <div class="flex text-[10px] sm:text-xs pb-2 pl-2">
-            <a [routerLink]="['/temperature', cityName]" class="pr-2">Temperature °C</a>
-            <a [routerLink]="['/rain', cityName]">Rain mm/h</a>
+            <a 
+                [routerLink]="['/temperature', cityName]"
+                routerLinkActive="underline"
+                class="pr-2"
+            >
+                Temperature °C
+            </a>
+            <a
+                [routerLink]="['/rain', cityName]"
+                routerLinkActive="underline"
+            >
+                Rain mm/h
+            </a>
         </div>
         <router-outlet *ngIf="cityName"></router-outlet>
     </div>

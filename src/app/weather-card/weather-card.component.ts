@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { WeatherData } from '../models/weather.model';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-weather-card',
@@ -13,7 +13,11 @@ export class WeatherCardComponent implements OnInit {
   cityName: string = '';
   currentWeatherData?: WeatherData;
 
-  constructor (private WeatherService: WeatherService, private router: Router) {}
+  constructor (
+    private WeatherService: WeatherService, 
+    private router: Router,
+    private route: ActivatedRoute
+    ) {}
 
   ngOnInit(): void {
     this.loadCurrentWeatherData();
@@ -47,5 +51,9 @@ export class WeatherCardComponent implements OnInit {
         }
       })
     }
+  }
+
+  isActive(url: string): boolean {
+    return this.route.snapshot.url.join('/') === url;
   }
 }
