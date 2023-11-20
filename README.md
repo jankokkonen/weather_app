@@ -1,6 +1,6 @@
 # WeatherApp
 
-Simple weather app [LIVE](https://jankokkonen.github.io/weather_app/)
+Simple weather app which is connected to weather API
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
